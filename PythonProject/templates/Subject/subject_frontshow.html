@@ -1,0 +1,85 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+  <TITLE>查看题目信息详情</TITLE>
+  <link href="{% static 'plugins/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'plugins/bootstrap-dashen.css' %}" rel="stylesheet">
+  <link href="{% static 'plugins/font-awesome.css' %}" rel="stylesheet">
+  <link href="{% static 'plugins/animate.css' %}" rel="stylesheet">
+</head>
+<body style="margin-top:70px;"> 
+{% include 'header.html' %}
+<div class="container">
+	<ul class="breadcrumb">
+  		<li><a href={% url 'Index:index' %}">首页</a></li>
+  		<li><a href="{% url 'Subject:frontList' %}">题目信息信息</a></li>
+  		<li class="active">详情查看</li>
+	</ul>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目编号:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.subjectId }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目类型:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.subjectTypeObj.subjectTypeName }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目名称:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.subjectName }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目图片:</div>
+		<div class="col-md-10 col-xs-6"><img class="img-responsive" src="{{ subject.subjectPhoto.url }}"  border="0px"/></div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目内容:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.content | safe  }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">题目状态:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.subjectState }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">限选人数:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.personNum }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">指导老师:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.teacherObj.name }}</div>
+	</div>
+	<div class="row bottom15"> 
+		<div class="col-md-2 col-xs-4 text-right bold">发布时间:</div>
+		<div class="col-md-10 col-xs-6">{{ subject.addTime }}</div>
+	</div>
+	<div class="row bottom15">
+		<div class="col-md-2 col-xs-4"></div>
+		<div class="col-md-6 col-xs-6">
+			<button onclick="userSelect();" class="btn btn-primary">我要选题</button>
+			<button onclick="history.back();" class="btn btn-info">返回</button>
+		</div>
+	</div>
+</div> 
+{% include 'footer.html' %}
+<script src="{% static 'plugins/jquery.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap.js' %}"></script>
+<script src="{% static 'plugins/wow.min.js' %}"></script>
+<script>
+function userSelect() {
+    location.href = '/SelectItem/userFrontAdd?subjectId={{ subject.subjectId }}';
+}
+
+$(function(){
+        /*小屏幕导航点击关闭菜单*/
+        $('.navbar-collapse a').click(function(){
+            $('.navbar-collapse').collapse('hide');
+        });
+        new WOW().init();
+ })
+ </script> 
+</body>
+</html>
+

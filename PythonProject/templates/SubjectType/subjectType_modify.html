@@ -1,0 +1,35 @@
+{% load staticfiles %}
+{% include 'check_logstate.html' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/subjectType.css' %}" />
+<div id="subjectType_EditDiv">
+	<form id="subjectTypeModifyForm" enctype="multipart/form-data"  method="post">
+        {% csrf_token %}
+		<div>
+			<span class="label">类型编号:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="subjectType_subjectTypeId_modify" name="subjectType.subjectTypeId" value="{{ subjectTypeId }}" style="width:200px" />
+			</span>
+		</div>
+
+		<div>
+			<span class="label">类型名称:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="subjectType_subjectTypeName_modify" name="subjectType.subjectTypeName" style="width:200px" />
+
+			</span>
+
+		</div>
+		<div>
+			<span class="label">类型说明:</span>
+			<span class="inputControl">
+				<textarea id="subjectType_subjectTypeDesc_modify" name="subjectType.subjectTypeDesc" rows="8" cols="60"></textarea>
+
+			</span>
+
+		</div>
+		<div class="operation">
+			<a id="subjectTypeModifyButton" class="easyui-linkbutton">更新</a> 
+		</div>
+	</form>
+</div>
+<script src="{% static 'js/SubjectType/subjectType_modify.js' %}"></script>
